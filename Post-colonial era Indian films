@@ -1,0 +1,253 @@
+#Query to collect Indian films released in Bengali and Marathi languages
+
+SELECT ?item ?itemLabel
+#selecting the first date of release when several date of release are mentioned 
+(MIN(?date) as ?first_publication) 
+#concatenate the variables returning several strings as a result 
+(GROUP_CONCAT(DISTINCT ?genreLabel;separator=", ") AS ?genre)
+(GROUP_CONCAT(DISTINCT ?subjectLabel;separator=", ") AS ?subject)
+(GROUP_CONCAT(DISTINCT ?countryLabel;separator=", ") AS ?country)
+(GROUP_CONCAT(DISTINCT ?languageLabel;separator=", ") AS ?language)
+(GROUP_CONCAT(DISTINCT ?articleLabel;separator=", ") AS ?article)
+
+WHERE {
+ 
+  {?item wdt:P31 wd:Q11424; #selecting all the films...
+         wdt:P495 wd:Q668; #whose country of origin is India
+         wdt:P364 wd:Q9610; #whose language of release was Bengali
+         wdt:P495 ?country; #returning the name of the country
+         wdt:P364 ?language; #returning the language of release
+         wdt:P577 ?date.} #returning the date of release
+  
+   UNION{?item wdt:P31 wd:Q11424; #same query for films released in Marathi
+         wdt:P495 wd:Q668;
+         wdt:P364 wd:Q1571; 
+         wdt:P495 ?country;
+         wdt:P364 ?language;
+         wdt:P577 ?date.}
+  
+  OPTIONAL {?item wdt:P136 ?genre}.    #returning the genre of each film, when available
+  OPTIONAL {?item wdt:P921 ?subject}.  #returning the main subject of each film, when available
+  OPTIONAL {                           #returning the link to the English wikipedia webpage associated to each film
+       ?article schema:about ?item .
+       ?article schema:inLanguage "en" .
+       ?article schema:isPartOf <https://en.wikipedia.org/> .
+    }
+       
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".
+                         ?item rdfs:label ?itemLabel.
+                         ?genre rdfs:label ?genreLabel.
+                         ?subject rdfs:label ?subjectLabel.
+                         ?country rdfs:label ?countryLabel.
+                         ?language rdfs:label ?languageLabel.
+                         ?article rdfs:label ?articleLabel.}
+
+} GROUP BY ?item ?itemLabel 
+
+
+
+#Query to collect Indian films released in Kannada language
+
+SELECT ?item ?itemLabel
+#selecting the first date of release when several date of release are mentioned 
+(MIN(?date) as ?first_publication) 
+#concatenate the variables returning several strings as a result 
+(GROUP_CONCAT(DISTINCT ?genreLabel;separator=", ") AS ?genre)
+(GROUP_CONCAT(DISTINCT ?subjectLabel;separator=", ") AS ?subject)
+(GROUP_CONCAT(DISTINCT ?countryLabel;separator=", ") AS ?country)
+(GROUP_CONCAT(DISTINCT ?languageLabel;separator=", ") AS ?language)
+(GROUP_CONCAT(DISTINCT ?articleLabel;separator=", ") AS ?article)
+
+WHERE {
+ 
+  {?item wdt:P31 wd:Q11424; #selecting all the films...
+         wdt:P495 wd:Q668; #whose country of origin is India
+         wdt:P364 wd:Q33673; #whose language of release was Kannada
+         wdt:P495 ?country; #returning the name of the country
+         wdt:P364 ?language; #returning the language of release
+         wdt:P577 ?date.} #returning the date of release
+  
+  OPTIONAL {?item wdt:P136 ?genre}.    #returning the genre of each film, when available
+  OPTIONAL {?item wdt:P921 ?subject}.  #returning the main subject of each film, when available
+  OPTIONAL {                           #returning the link to the English wikipedia webpage associated to each film
+       ?article schema:about ?item .
+       ?article schema:inLanguage "en" .
+       ?article schema:isPartOf <https://en.wikipedia.org/> .
+    }
+       
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".
+                         ?item rdfs:label ?itemLabel.
+                         ?genre rdfs:label ?genreLabel.
+                         ?subject rdfs:label ?subjectLabel.
+                         ?country rdfs:label ?countryLabel.
+                         ?language rdfs:label ?languageLabel.
+                         ?article rdfs:label ?articleLabel.}
+
+} GROUP BY ?item ?itemLabel 
+
+
+
+#Query to collect Indian films released in Malayalam language
+
+SELECT ?item ?itemLabel
+#selecting the first date of release when several date of release are mentioned 
+(MIN(?date) as ?first_publication) 
+#concatenate the variables returning several strings as a result 
+(GROUP_CONCAT(DISTINCT ?genreLabel;separator=", ") AS ?genre)
+(GROUP_CONCAT(DISTINCT ?subjectLabel;separator=", ") AS ?subject)
+(GROUP_CONCAT(DISTINCT ?countryLabel;separator=", ") AS ?country)
+(GROUP_CONCAT(DISTINCT ?languageLabel;separator=", ") AS ?language)
+(GROUP_CONCAT(DISTINCT ?articleLabel;separator=", ") AS ?article)
+
+WHERE {
+ 
+  {?item wdt:P31 wd:Q11424; #selecting all the films...
+         wdt:P495 wd:Q668; #whose country of origin is India
+         wdt:P364 wd:Q36236; #whose language of release was Kannada
+         wdt:P495 ?country; #returning the name of the country
+         wdt:P364 ?language; #returning the language of release
+         wdt:P577 ?date.} #returning the date of release
+  
+  OPTIONAL {?item wdt:P136 ?genre}.    #returning the genre of each film, when available
+  OPTIONAL {?item wdt:P921 ?subject}.  #returning the main subject of each film, when available
+  OPTIONAL {                           #returning the link to the English wikipedia webpage associated to each film
+       ?article schema:about ?item .
+       ?article schema:inLanguage "en" .
+       ?article schema:isPartOf <https://en.wikipedia.org/> .
+    }
+       
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".
+                         ?item rdfs:label ?itemLabel.
+                         ?genre rdfs:label ?genreLabel.
+                         ?subject rdfs:label ?subjectLabel.
+                         ?country rdfs:label ?countryLabel.
+                         ?language rdfs:label ?languageLabel.
+                         ?article rdfs:label ?articleLabel.}
+
+} GROUP BY ?item ?itemLabel 
+
+
+
+#Query to collect Indian films released in Telugu language
+
+SELECT ?item ?itemLabel
+#selecting the first date of release when several date of release are mentioned 
+(MIN(?date) as ?first_publication) 
+#concatenate the variables returning several strings as a result 
+(GROUP_CONCAT(DISTINCT ?genreLabel;separator=", ") AS ?genre)
+(GROUP_CONCAT(DISTINCT ?subjectLabel;separator=", ") AS ?subject)
+(GROUP_CONCAT(DISTINCT ?countryLabel;separator=", ") AS ?country)
+(GROUP_CONCAT(DISTINCT ?languageLabel;separator=", ") AS ?language)
+(GROUP_CONCAT(DISTINCT ?articleLabel;separator=", ") AS ?article)
+
+WHERE {
+ 
+  {?item wdt:P31 wd:Q11424; #selecting all the films...
+         wdt:P495 wd:Q668; #whose country of origin is India
+         wdt:P364 wd:Q8097; #whose language of release was Kannada
+         wdt:P495 ?country; #returning the name of the country
+         wdt:P364 ?language; #returning the language of release
+         wdt:P577 ?date.} #returning the date of release
+  
+  OPTIONAL {?item wdt:P136 ?genre}.    #returning the genre of each film, when available
+  OPTIONAL {?item wdt:P921 ?subject}.  #returning the main subject of each film, when available
+  OPTIONAL {                           #returning the link to the English wikipedia webpage associated to each film
+       ?article schema:about ?item .
+       ?article schema:inLanguage "en" .
+       ?article schema:isPartOf <https://en.wikipedia.org/> .
+    }
+       
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".
+                         ?item rdfs:label ?itemLabel.
+                         ?genre rdfs:label ?genreLabel.
+                         ?subject rdfs:label ?subjectLabel.
+                         ?country rdfs:label ?countryLabel.
+                         ?language rdfs:label ?languageLabel.
+                         ?article rdfs:label ?articleLabel.}
+
+} GROUP BY ?item ?itemLabel
+
+
+
+#Query to collect Indian films released in Tamil language
+
+SELECT ?item ?itemLabel
+#selecting the first date of release when several date of release are mentioned 
+(MIN(?date) as ?first_publication) 
+#concatenate the variables returning several strings as a result 
+(GROUP_CONCAT(DISTINCT ?genreLabel;separator=", ") AS ?genre)
+(GROUP_CONCAT(DISTINCT ?subjectLabel;separator=", ") AS ?subject)
+(GROUP_CONCAT(DISTINCT ?countryLabel;separator=", ") AS ?country)
+(GROUP_CONCAT(DISTINCT ?languageLabel;separator=", ") AS ?language)
+(GROUP_CONCAT(DISTINCT ?articleLabel;separator=", ") AS ?article)
+
+WHERE {
+ 
+  {?item wdt:P31 wd:Q11424; #selecting all the films...
+         wdt:P495 wd:Q668; #whose country of origin is India
+         wdt:P364 wd:Q5885; #whose language of release was Tamil
+         wdt:P495 ?country; #returning the name of the country
+         wdt:P364 ?language; #returning the language of release
+         wdt:P577 ?date.} #returning the date of release
+  
+  OPTIONAL {?item wdt:P136 ?genre}.    #returning the genre of each film, when available
+  OPTIONAL {?item wdt:P921 ?subject}.  #returning the main subject of each film, when available
+  OPTIONAL {                           #returning the link to the English wikipedia webpage associated to each film
+       ?article schema:about ?item .
+       ?article schema:inLanguage "en" .
+       ?article schema:isPartOf <https://en.wikipedia.org/> .
+    }
+       
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".
+                         ?item rdfs:label ?itemLabel.
+                         ?genre rdfs:label ?genreLabel.
+                         ?subject rdfs:label ?subjectLabel.
+                         ?country rdfs:label ?countryLabel.
+                         ?language rdfs:label ?languageLabel.
+                         ?article rdfs:label ?articleLabel.}
+
+} GROUP BY ?item ?itemLabel 
+
+
+
+#Queries to collect Hindi films (before 2000 and since 2000)
+
+SELECT ?item ?itemLabel
+#selecting the first date of release when several date of release are mentioned 
+(MIN(?date) as ?first_publication) 
+#concatenate the variables returning several strings as a result 
+(GROUP_CONCAT(DISTINCT ?genreLabel;separator=", ") AS ?genre)
+(GROUP_CONCAT(DISTINCT ?subjectLabel;separator=", ") AS ?subject)
+(GROUP_CONCAT(DISTINCT ?countryLabel;separator=", ") AS ?country)
+(GROUP_CONCAT(DISTINCT ?languageLabel;separator=", ") AS ?language)
+(GROUP_CONCAT(DISTINCT ?articleLabel;separator=", ") AS ?article)
+
+WHERE {
+ 
+  {?item wdt:P31 wd:Q11424; #selecting all the films...
+         wdt:P495 wd:Q668; #whose country of origin is India
+         wdt:P364 wd:Q1568; #whose language of release was Tamil
+         wdt:P495 ?country; #returning the name of the country
+         wdt:P364 ?language; #returning the language of release
+         wdt:P577 ?date.} #returning the date of release
+  
+  OPTIONAL {?item wdt:P136 ?genre}.    #returning the genre of each film, when available
+  OPTIONAL {?item wdt:P921 ?subject}.  #returning the main subject of each film, when available
+  OPTIONAL {                           #returning the link to the English wikipedia webpage associated to each film
+       ?article schema:about ?item .
+       ?article schema:inLanguage "en" .
+       ?article schema:isPartOf <https://en.wikipedia.org/> .
+    }
+  
+  #FILTER(YEAR(?date) < 2000).
+  FILTER(YEAR(?date) >= 2000).
+    
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".
+                         ?item rdfs:label ?itemLabel.
+                         ?genre rdfs:label ?genreLabel.
+                         ?subject rdfs:label ?subjectLabel.
+                         ?country rdfs:label ?countryLabel.
+                         ?language rdfs:label ?languageLabel.
+                         ?article rdfs:label ?articleLabel.}
+
+} GROUP BY ?item ?itemLabel 
