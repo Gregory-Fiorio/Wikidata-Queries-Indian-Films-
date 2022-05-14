@@ -1,3 +1,5 @@
+#The purpose of this query was to gather metadata on films that were produced in countries other than India within the cultural area of the Indian subcontinent. 
+
 SELECT ?item ?itemLabel
 #selecting the first date of release when several date of release are mentioned 
 (MIN(?date) as ?first_publication) 
@@ -27,7 +29,6 @@ WHERE {
          wdt:P495 ?country;
          wdt:P364 ?language;
          wdt:P577 ?date.}
-  
    
   UNION{?item wdt:P31 wd:Q11424; #same query for films from Sri Lanka
          wdt:P495 wd:Q854;
@@ -35,7 +36,6 @@ WHERE {
          wdt:P364 ?language;
          wdt:P577 ?date.}
   
-   
   UNION{?item wdt:P31 wd:Q11424; #same query for films from Nepal
          wdt:P495 wd:Q837;
          wdt:P495 ?country;
