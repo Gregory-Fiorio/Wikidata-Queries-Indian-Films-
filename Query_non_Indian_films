@@ -1,0 +1,61 @@
+SELECT ?item ?itemLabel
+#selecting the first date of release when several date of release are mentioned 
+(MIN(?date) as ?first_publication) 
+#concatenate the variables returning several strings as a result 
+(GROUP_CONCAT(DISTINCT ?genreLabel;separator=", ") AS ?genre)
+(GROUP_CONCAT(DISTINCT ?subjectLabel;separator=", ") AS ?subject)
+(GROUP_CONCAT(DISTINCT ?countryLabel;separator=", ") AS ?country)
+(GROUP_CONCAT(DISTINCT ?languageLabel;separator=", ") AS ?language)
+(GROUP_CONCAT(DISTINCT ?articleLabel;separator=", ") AS ?article)
+
+WHERE {
+ 
+  {?item wdt:P31 wd:Q11424; #selecting all the films...
+         wdt:P495 wd:Q902; #whose country of origin is Bangladesh
+         wdt:P495 ?country; #returning the name of the country
+         wdt:P364 ?language; #returning the language of release
+         wdt:P577 ?date.} #returning the date of release
+  
+  UNION{?item wdt:P31 wd:Q11424; #same query for films from Pakistan
+         wdt:P495 wd:Q843; 
+         wdt:P495 ?country;
+         wdt:P364 ?language;
+         wdt:P577 ?date.}
+  
+  UNION{?item wdt:P31 wd:Q11424; #same query for films from Bhoutan
+         wdt:P495 wd:Q917;
+         wdt:P495 ?country;
+         wdt:P364 ?language;
+         wdt:P577 ?date.}
+  
+   
+  UNION{?item wdt:P31 wd:Q11424; #same query for films from Sri Lanka
+         wdt:P495 wd:Q854;
+         wdt:P495 ?country;
+         wdt:P364 ?language;
+         wdt:P577 ?date.}
+  
+   
+  UNION{?item wdt:P31 wd:Q11424; #same query for films from Nepal
+         wdt:P495 wd:Q837;
+         wdt:P495 ?country;
+         wdt:P364 ?language;
+         wdt:P577 ?date.}
+  
+  OPTIONAL {?item wdt:P136 ?genre}.    #returning the genre of each film, when available
+  OPTIONAL {?item wdt:P921 ?subject}.  #returning the main subject of each film, when available
+  OPTIONAL {                           #returning the link to the English wikipedia webpage associated to each film
+       ?article schema:about ?item .
+       ?article schema:inLanguage "en" .
+       ?article schema:isPartOf <https://en.wikipedia.org/> .
+    }
+       
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".
+                         ?item rdfs:label ?itemLabel.
+                         ?genre rdfs:label ?genreLabel.
+                         ?subject rdfs:label ?subjectLabel.
+                         ?country rdfs:label ?countryLabel.
+                         ?language rdfs:label ?languageLabel.
+                         ?article rdfs:label ?articleLabel.}
+
+} GROUP BY ?item ?itemLabel 
