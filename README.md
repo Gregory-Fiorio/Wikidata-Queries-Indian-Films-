@@ -1,2 +1,2 @@
 # Wikidata-Queries-Indian-Films-
-This project aimed at collecting metadata about Indian films from Wikidata. 
+This project aimed at collecting metadata about Indian films from Wikidata as part of the study about the cultural evolution of fictional films in India. I intended to systematically extract their title, their date of release and their original language and when available, links to their dedicated wikipedia webpages and keywords related to their genre and their main subject. 
